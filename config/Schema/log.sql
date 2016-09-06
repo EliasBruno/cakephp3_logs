@@ -11,7 +11,6 @@ CREATE TABLE `logs` (
   `tabela` varchar(60) NOT NULL,
   `modulo` varchar(60) NOT NULL,
   `created` datetime NOT NULL,
-  `updated` datetime DEFAULT NULL,
-  `projeto_id` int(11) DEFAULT NULL,
+  `updated` datetime DEFAULT NULL
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=673 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
