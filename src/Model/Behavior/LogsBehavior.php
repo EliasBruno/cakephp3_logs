@@ -20,15 +20,6 @@ class LogsBehavior extends Behavior
       $this->request = new Request();
     }
 
-    // public function afterSave(Event $event, Entity $entity, $options) {
-    //   $entity->projeto_id = 2;
-    //   debug($options);exit();
-    //   if(!isset($this->request->session()->read("Auth")['User'])){
-    //     $event->stopPropagation();
-    //     throw new \UnexpectedValueException('É necessário estar logado no sistema para realizar operações!');
-    //   }
-    // }
-
     public function beforeSave(Event $event, Entity $entity, $options) {
 
       $session = $this->request->session()->read("Auth")['User'];
@@ -43,7 +34,6 @@ class LogsBehavior extends Behavior
       $modulo = $event->subject->alias();
       $url = $this->request->referer();
       if($entity->isNew()){
-        $entity->projeto_id = $session['projeto_id'];
         $registros =  $this->array_post($entity->toArray());
         $dados="Foi cadastrado pelo usuário ".$session['nome']." os seguintes dados: $registros ";
         $data=['url'=>$url,'acao'=>'create','user_id'=>$session['id'],'dados'=>$dados,
@@ -52,7 +42,7 @@ class LogsBehavior extends Behavior
         $registros_changes= $this->array_change($entity->toArray(),$entity);
         $dados="Foi alterado pelo usuário ".$session['nome']." os seguintes campos com o ID $entity->id - $registros_changes ";
         $data=['url'=>$url,'acao'=>'update','user_id'=>$session['id'],'dados'=>$dados,
-              'tabela'=>$tabela,'modulo'=>$modulo,'projeto_id'=>$session['projeto_id']];
+              'tabela'=>$tabela,'modulo'=>$modulo];
       }
       $log=$logs->newEntity($data);
       $logs->save($log);
