@@ -3,7 +3,7 @@ Funcionalidade:
 -Registra todos os logs de crud do sistema.
 -Possibilita Gerênciar os logs através da tela pesquisas.
 
-Itens que são registrado:
+Itens que são registrados:
 -Ação Realizada;
 -Informações de dados que foram inseridos;
 -Id do usuário;
